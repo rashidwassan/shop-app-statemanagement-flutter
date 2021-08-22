@@ -16,12 +16,16 @@ class ProductItem extends StatelessWidget {
       borderRadius: BorderRadius.circular(8),
       child: GridTile(
         child: GestureDetector(
-            onTap: () {
-              // sending data to the next page with the help of navigator's push named method
-              Navigator.of(context)
-                  .pushNamed(ProductDetailScreen.id, arguments: id);
-            },
-            child: Image.network(imageUrl, fit: BoxFit.cover)),
+          onTap: () {
+            // sending data to the next page with the help of navigator's push named method
+            Navigator.of(context)
+                .pushNamed(ProductDetailScreen.id, arguments: id);
+          },
+          child: Image.network(
+            imageUrl,
+            fit: BoxFit.cover,
+          ),
+        ),
         footer: GridTileBar(
           backgroundColor: Colors.black87,
           leading: IconButton(
