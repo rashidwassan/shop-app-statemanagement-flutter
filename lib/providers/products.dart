@@ -37,7 +37,16 @@ class Products with ChangeNotifier {
     ),
   ];
 
+  // bool _showFavoritesOnly = false;
+
+  List<Product> get favoriteItems {
+    return _items.where((element) => element.isFavourite).toList();
+  }
+
   List<Product> get items {
+    // if (_showFavoritesOnly) {
+    //   return _items.where((element) => element.isFavourite).toList();
+    // }
     return [..._items];
   }
 
@@ -49,4 +58,14 @@ class Products with ChangeNotifier {
     // _items.add(value);
     notifyListeners();
   }
+
+  // void showFavoritesOnly() {
+  //   _showFavoritesOnly = true;
+  //   notifyListeners();
+  // }
+
+  // void showAll() {
+  //   _showFavoritesOnly = false;
+  //   notifyListeners();
+  // }
 }

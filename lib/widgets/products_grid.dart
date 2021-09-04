@@ -5,13 +5,17 @@ import 'package:shop_app/widgets/product_item.dart';
 
 class ProductsGrid extends StatelessWidget {
   const ProductsGrid({
+    this.showFavs = false,
     Key? key,
   }) : super(key: key);
+
+  final bool showFavs;
 
   @override
   Widget build(BuildContext context) {
     final productsData = Provider.of<Products>(context);
-    final loadedProducts = productsData.items;
+    final loadedProducts =
+        showFavs ? productsData.favoriteItems : productsData.items;
     return GridView.builder(
         padding: const EdgeInsets.all(16),
         physics: const BouncingScrollPhysics(),
