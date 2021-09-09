@@ -21,8 +21,6 @@ class ProductItem extends StatelessWidget {
             Navigator.of(context)
                 .pushNamed(ProductDetailScreen.id, arguments: product.id);
           },
-
-          //TODO
           child: Image.network(
             product.imageUrl,
             fit: BoxFit.cover,

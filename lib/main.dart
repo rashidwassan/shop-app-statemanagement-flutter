@@ -44,7 +44,7 @@ class ShopApp extends StatelessWidget {
                 onSurface: Colors.black87,
                 secondaryVariant: Colors.deepOrange.shade700,
                 surface: Colors.white)),
-        home: ProductsOverviewScreen(),
+        home: const ProductsOverviewScreen(),
         routes: {
           ProductDetailScreen.id: (context) => const ProductDetailScreen(),
           CartScreen.routeName: (context) => const CartScreen(),
