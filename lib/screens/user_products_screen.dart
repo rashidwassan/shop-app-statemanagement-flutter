@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shop_app/providers/products.dart';
+import 'package:shop_app/screens/edit_product_screen.dart';
 import 'package:shop_app/widgets/app_drawer.dart';
 import 'package:shop_app/widgets/user_product_item.dart';
-import 'package:velocity_x/velocity_x.dart';
 
 class UserProductsScreen extends StatefulWidget {
   const UserProductsScreen({Key? key}) : super(key: key);
@@ -22,7 +22,9 @@ class _UserProductsScreenState extends State<UserProductsScreen> {
         title: const Text('Your Products'),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).pushNamed(EditProductScreen.id);
+            },
             icon: const Icon(Icons.add),
           ),
         ],
