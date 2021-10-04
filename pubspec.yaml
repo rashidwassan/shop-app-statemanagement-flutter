@@ -14,6 +14,7 @@ dependencies:
     sdk: flutter
   intl: ^0.17.0
   provider: ^6.0.0
+  velocity_x: ^3.3.0
 
 dev_dependencies:
   
