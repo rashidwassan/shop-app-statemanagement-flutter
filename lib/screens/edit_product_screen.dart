@@ -28,6 +28,8 @@ class _EditProductScreenState extends State<EditProductScreen> {
     }
   }
 
+  void _saveForm() {}
+
   @override
   void dispose() {
     _imageUrlFocusNode.removeListener(_updateImageUrl);
@@ -41,9 +43,9 @@ class _EditProductScreenState extends State<EditProductScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Edit Product'),
-      ),
+      appBar: AppBar(title: const Text('Edit Product'), actions: [
+        IconButton(icon: const Icon(Icons.save), onPressed: _saveForm)
+      ]),
       body: Form(
         child: ListView(
           children: [
@@ -108,6 +110,9 @@ class _EditProductScreenState extends State<EditProductScreen> {
                     textInputAction: TextInputAction.done,
                     controller: _imageUrlController,
                     focusNode: _imageUrlFocusNode,
+                    onFieldSubmitted: (_) {
+                      _saveForm();
+                    },
                   ),
                 )
               ],
