@@ -1,4 +1,7 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
+import 'package:shop_app/providers/product.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class EditProductScreen extends StatefulWidget {
@@ -15,6 +18,9 @@ class _EditProductScreenState extends State<EditProductScreen> {
   final FocusNode _descriptionFocusNode = FocusNode();
   final FocusNode _imageUrlFocusNode = FocusNode();
   final TextEditingController _imageUrlController = TextEditingController();
+  final _form = GlobalKey<FormState>();
+  var _editedProduct =
+      Product(id: '', title: '', description: '', price: 0, imageUrl: '');
 
   @override
   void initState() {
@@ -28,7 +34,9 @@ class _EditProductScreenState extends State<EditProductScreen> {
     }
   }
 
-  void _saveForm() {}
+  void _saveForm() {
+    _form.currentState!.save();
+  }
 
   @override
   void dispose() {
@@ -47,6 +55,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
         IconButton(icon: const Icon(Icons.save), onPressed: _saveForm)
       ]),
       body: Form(
+        key: _form,
         child: ListView(
           children: [
             TextFormField(
@@ -54,6 +63,14 @@ class _EditProductScreenState extends State<EditProductScreen> {
                 labelText: 'Title',
               ),
               textInputAction: TextInputAction.next,
+              onSaved: (value) {
+                _editedProduct = Product(
+                    id: _editedProduct.id,
+                    title: value!,
+                    description: _editedProduct.description,
+                    price: _editedProduct.price,
+                    imageUrl: _editedProduct.imageUrl);
+              },
               onFieldSubmitted: (_) {
                 // assigning focus node to next field
                 FocusScope.of(context).requestFocus(_priceFocusNode);
@@ -66,6 +83,14 @@ class _EditProductScreenState extends State<EditProductScreen> {
               keyboardType: TextInputType.number,
               textInputAction: TextInputAction.next,
               focusNode: _priceFocusNode,
+              onSaved: (value) {
+                _editedProduct = Product(
+                    id: _editedProduct.id,
+                    title: _editedProduct.title,
+                    description: _editedProduct.description,
+                    price: double.parse(value.toString()),
+                    imageUrl: _editedProduct.imageUrl);
+              },
               onFieldSubmitted: (_) {
                 // assigning focus node to next field
                 FocusScope.of(context).requestFocus(_descriptionFocusNode);
@@ -78,6 +103,14 @@ class _EditProductScreenState extends State<EditProductScreen> {
               maxLines: 3,
               focusNode: _descriptionFocusNode,
               keyboardType: TextInputType.multiline,
+              onSaved: (value) {
+                _editedProduct = Product(
+                    id: _editedProduct.id,
+                    title: _editedProduct.title,
+                    description: value!,
+                    price: _editedProduct.price,
+                    imageUrl: _editedProduct.imageUrl);
+              },
               onFieldSubmitted: (_) {
                 // assigning focus node to next field
                 FocusScope.of(context).requestFocus(_priceFocusNode);
@@ -118,6 +151,14 @@ class _EditProductScreenState extends State<EditProductScreen> {
                     textInputAction: TextInputAction.done,
                     controller: _imageUrlController,
                     focusNode: _imageUrlFocusNode,
+                    onSaved: (value) {
+                      _editedProduct = Product(
+                          id: _editedProduct.id,
+                          title: _editedProduct.title,
+                          description: _editedProduct.description,
+                          price: _editedProduct.price,
+                          imageUrl: value!);
+                    },
                     onFieldSubmitted: (_) {
                       _saveForm();
                     },
