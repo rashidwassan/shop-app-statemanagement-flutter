@@ -96,9 +96,17 @@ class _EditProductScreenState extends State<EditProductScreen> {
                   ),
                   child: _imageUrlController.text.isEmpty
                       ? const Text('Enter a Url').centered()
-                      : FittedBox(
-                          child: Image.network(_imageUrlController.text),
-                          fit: BoxFit.cover,
+                      : ClipRRect(
+                          borderRadius: BorderRadius.circular(12),
+                          child: FittedBox(
+                            child: Image.network(
+                              _imageUrlController.text,
+                              fit: BoxFit.cover,
+                              width: 100,
+                              height: 100,
+                            ),
+                            fit: BoxFit.cover,
+                          ),
                         ),
                 ),
                 Flexible(
