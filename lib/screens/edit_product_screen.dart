@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:shop_app/providers/product.dart';
 import 'package:velocity_x/velocity_x.dart';
