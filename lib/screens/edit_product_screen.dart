@@ -33,6 +33,9 @@ class _EditProductScreenState extends State<EditProductScreen> {
   }
 
   void _saveForm() {
+    final isValid = _form.currentState!.validate();
+    if (!isValid) return;
+
     _form.currentState!.save();
   }
 
@@ -69,6 +72,9 @@ class _EditProductScreenState extends State<EditProductScreen> {
                     price: _editedProduct.price,
                     imageUrl: _editedProduct.imageUrl);
               },
+              validator: (value) {
+                if (value == '') return 'Please provide a value';
+              },
               onFieldSubmitted: (_) {
                 // assigning focus node to next field
                 FocusScope.of(context).requestFocus(_priceFocusNode);
@@ -89,6 +95,16 @@ class _EditProductScreenState extends State<EditProductScreen> {
                     price: double.parse(value.toString()),
                     imageUrl: _editedProduct.imageUrl);
               },
+              validator: (value) {
+                if (value!.isEmpty) return 'Please enter a price.';
+                if (double.tryParse(value) == null) {
+                  return 'Please enter a valid number.';
+                }
+                if (double.parse(value) <= 0) {
+                  return 'The number must be greater than 0.';
+                }
+                return null;
+              },
               onFieldSubmitted: (_) {
                 // assigning focus node to next field
                 FocusScope.of(context).requestFocus(_descriptionFocusNode);
@@ -108,6 +124,14 @@ class _EditProductScreenState extends State<EditProductScreen> {
                     description: value!,
                     price: _editedProduct.price,
                     imageUrl: _editedProduct.imageUrl);
+              },
+              validator: (value) {
+                if (value!.isEmpty) {
+                  return 'Please enter description';
+                }
+                if (value.length < 10) {
+                  return 'The description must be more than 10 characters';
+                }
               },
               onFieldSubmitted: (_) {
                 // assigning focus node to next field
