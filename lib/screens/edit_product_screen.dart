@@ -181,6 +181,15 @@ class _EditProductScreenState extends State<EditProductScreen> {
                           price: _editedProduct.price,
                           imageUrl: value!);
                     },
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Please enter image Url';
+                      }
+                      if (!value.startsWith('http') ||
+                          !value.startsWith('https')) {
+                        return 'Please enter a valid Url';
+                      }
+                    },
                     onFieldSubmitted: (_) {
                       _saveForm();
                     },
